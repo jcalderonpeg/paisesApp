@@ -1,36 +1,44 @@
-<div *ngIf="!pais; else divPais" class="alert alert-info">
-    Espere por favor...
-</div>
+<div class="animate__animated animate__fadeIn">
+    <div *ngIf="!pais; else divPais" class="alert alert-info">
+        Espere por favor...
+    </div>
+    
+    <ng-template #divPais>
+        <div class="row">
+            <div class="col-12">
+                <h1> País: <small>{{ pais.name.common }}</small></h1>
+            </div>
+        </div>
 
-<ng-template #divPais>
-    <div class="row">
-        <div class="col-12">
-            <h1> País: <small>{{ pais.name.common }}</small></h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-4">
+                <h3>Bandera</h3>
+                <img [src]="pais.flags.svg" class="img-thumbnail" />
+            </div>
+            <div class="col">
+                <h3>Información</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Población</strong> {{ pais.population | number }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Código numérico</strong> {{ pais.ccn3 }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Código cca3</strong> {{ pais.cca3 }}
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <h3>Bandera</h3>
-            <img [src]="pais.flags.svg" class="img-thumbnail" />
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <span *ngFor="let translation of pais.translations | keyvalue, let i = index" class="badge bg-primary mx-1"> {{ translation.value.common }} </span>
+            </div>
         </div>
-        <div class="col">
-            <h3>Información</h3>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <strong>Población</strong> {{ pais.population | number }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Código numérico</strong> {{ pais.ccn3 }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Código cca3</strong> {{ pais.cca3 }}
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <span *ngFor="let translation of pais.translations | keyvalue, let i = index" class="badge bg-primary mx-1"> {{ translation.value.common }} </span>
-        </div>
-    </div>
-</ng-template>
+    </ng-template>
+</div>
